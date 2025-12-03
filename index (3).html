@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Clase 2</title>
+<style>
+    /* --- ESTILOS GENERALES Y AJUSTABLES --- */
+    html, body {
+        min-height: 100%;
+    }
+
+    body {
+        background-image: linear-gradient(to bottom, #c021f9, #f92e91);
+        background-attachment: fixed;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px 2.5mm;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        box-sizing: border-box;
+    }
+
+    .main-container {
+        max-width: 600px;
+        width: 100%;
+        background-color: transparent;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* --- ESTILOS PARA LAS IMÁGENES --- */
+    .welcome-image-container {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    .welcome-image-container img {
+        width: 100%;
+        height: auto;
+        border-radius: 17px;
+        display: block;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .no-shadow img {
+        box-shadow: none;
+    }
+
+    /* --- ESTILOS PARA LOS RECUADROS DE TEXTO --- */
+    .text-rectangle {
+        background-color: #f3f0f0;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 10px;
+        text-align: center;
+        color: black;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .text-rectangle.large {
+        font-size: 23pt;
+        font-weight: normal;
+    }
+
+    .text-rectangle.small {
+        font-size: 15pt;
+        font-weight: normal;
+        line-height: 1.4;
+    }
+
+    /* --- ESTILOS PARA EL FORMULARIO --- */
+    .form-container {
+        background-color: #fdd2fd;
+        border: 1px solid #cccccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+        text-align: left;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: black;
+        font-size: 19px;
+    }
+
+    /* Estilo para el asterisco rojo de "obligatorio" */
+    .form-group label .required-asterisk {
+        color: red;
+        margin-left: 2px;
+    }
+
+    /* Estilos de los campos de entrada unificados */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: white;
+        font-size: 19px;
+        font-family: Arial, sans-serif;
+        line-height: 1.2;
+        margin-bottom: 30px;
+    }
+
+    /* PROPIEDADES DE ALTURA Y COMPORTAMIENTO UNIFORMES */
+    .form-group textarea,
+    .form-group input[type="tel"] {
+        height: 54px;
+        line-height: 54px; /* Centra el texto verticalmente */
+        resize: none; /* Evita que el usuario cambie el tamaño */
+        overflow: hidden; /* Oculta cualquier texto que se desborde */
+    }
+
+    /* Regla específica para el campo de mensaje largo */
+    .form-group textarea#sugerencias {
+        height: auto;
+        min-height: 255px;
+        line-height: 1.2;
+        overflow: auto;
+        resize: vertical;
+    }
+    
+    /* Estilo para el placeholder "Tu respuesta" */
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: #000000;
+        opacity: 0.38;
+    }
+
+    .submit-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+
+    /* ESTILOS PARA LA IMAGEN Y BOTÓN DE AGRADECIMIENTO */
+    #mensaje-exito {
+        display: none;
+        margin-top: 20px;
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+    }
+
+    #mensaje-exito img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 17px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .whatsapp-button {
+        display: block;
+        margin: 30px auto 0;
+        max-width: 300px;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background-color: #25D366;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s;
+    }
+
+    .whatsapp-button:hover {
+        background-color: #128C7E;
+    }
+</style>
+</head>
+<body>
+
+<div class="main-container" id="main-container">
+    <div class="welcome-image-container">
+        <img src="images/isabel-villagomez-pagina-002-preguntas-clase-1.jpg" alt="Preguntas Clase 2">
+    </div>
+
+    <div class="text-rectangle large">
+        📝 Preguntas Clase 2
+    </div>
+
+    <div class="text-rectangle small">
+        ¡Hola! Nos gustaría saber cómo te fue en tu primera sesión para seguir mejorando. Por favor, responde las siguientes preguntas.
+    </div>
+
+    <div class="form-container" id="form-container">
+        <p style="color: red; font-size: 14px; margin-top: -10px;">
+            * Los campos con asterisco son obligatorios
+        </p>
+<form action="https://script.google.com/macros/s/AKfycbxrI7FqEGnbekaTfnJSKn-CNKB0cK8graaGBDxrUd23OaocZCQkLSIioF3v2nC-_XqYIw/exec" method="POST" id="miFormulario">
+
+<input type="hidden" name="form_name" value="clase_1">
+
+<div class="form-group">
+  <label for="nombre">1️⃣ ¿Cuál es tu nombre?</label>
+  <textarea id="nombre" name="nombre" placeholder="Tu respuesta"></textarea>
+</div>
+
+<div class="form-group">
+    <label for="pais">2️⃣ ¿De qué país nos visitas?</label>
+
+    <select id="pais" name="pais" required>
+        <option value="">Selecciona tu país</option>
+        <option value="CO" data-prefijo="+57">🇨🇴 Colombia</option>
+        <option value="MX" data-prefijo="+52">🇲🇽 México</option>
+        <option value="PE" data-prefijo="+51">🇵🇪 Perú</option>
+        <option value="EC" data-prefijo="+593">🇪🇨 Ecuador</option>
+        <option value="CL" data-prefijo="+56">🇨🇱 Chile</option>
+        <option value="BO" data-prefijo="+591">🇧🇴 Bolivia</option>
+        <option value="GT" data-prefijo="+502">🇬🇹 Guatemala</option>
+        <option value="SV" data-prefijo="+503">🇸🇻 El Salvador</option>
+        <option value="AR" data-prefijo="+54">🇦🇷 Argentina</option>
+        <option value="VE" data-prefijo="+58">🇻🇪 Venezuela</option>
+        <option value="HN" data-prefijo="+504">🇭🇳 Honduras</option>
+        <option value="UY" data-prefijo="+598">🇺🇾 Uruguay</option>
+        <option value="CR" data-prefijo="+506">🇨🇷 Costa Rica</option>
+    </select>
+</div>
+
+
+<div class="form-group">
+  <label for="telefono">3️⃣ 📞 Número de Teléfono 📲</label>
+<input type="tel" id="telefono" name="telefono"
+       inputmode="numeric"
+       pattern="[0-9\s+]*"
+       placeholder="Selecciona tu país primero"
+       required>
+</div>
+
+<div class="form-group">
+  <label for="formulario-medidas">4️⃣ ¿Ya pediste tu formulario para toma de medidas?</label>
+  <select id="formulario-medidas" name="formulario-medidas">
+    <option value="" disabled selected hidden>Selecciona una opción</option>
+    <option value="si-lo-tengo">Sí lo tengo ✅</option>
+    <option value="no-lo-he-pedido">Aún no lo he pedido ❌</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="corte-tela">5️⃣ ¿Pudiste entender el corte de Tela?</label>
+  <select id="corte-tela" name="corte-tela">
+    <option value="" disabled selected hidden>Selecciona una opción</option>
+    <option value="si-entendi">Sí entendí 😊</option>
+    <option value="no-entendi-bien">No entendí muy bien ☹️</option>
+    <option value="no-me-conecte">No pude conectarme 😣</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="pinzas">6️⃣ ¿Sabes para qué sirven las pinzas?</label>
+  <select id="pinzas" name="pinzas">
+    <option value="" disabled selected hidden>Selecciona una opción</option>
+    <option value="si-lo-se">Sí ya lo sé 🤗</option>
+    <option value="no-lo-se">No sé para qué sirven 🥺</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="primera-prenda">7️⃣ ¿Te sientes lista para hacer tu primera prenda?</label>
+  <select id="primera-prenda" name="primera-prenda">
+    <option value="" disabled selected hidden>Selecciona una opción</option>
+    <option value="estoy-lista">Estoy lista ☺️</option>
+    <option value="aun-no">Aún no estoy lista 😰</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="opinion-maestra">8️⃣ ¿Qué te parece la manera de explicar de la maestra Isabel?</label>
+  <select id="opinion-maestra" name="opinion-maestra">
+    <option value="" disabled selected hidden>Selecciona una opción</option>
+    <option value="muy-claro">Muy fácil y entendible 👌🏼</option>
+    <option value="me-costo">Me costó entender 🙆🏻‍♀️</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="objetivo">9️⃣ ¿Cuál es tu objetivo en la costura?</label>
+  <select id="objetivo" name="objetivo">
+    <option value="" disabled selected hidden>Selecciona una opción</option>
+    <option value="hobbie">Como hobbie 🥳</option>
+    <option value="familia">Para mí y mi familia ✂️👨‍👩‍👧‍👧</option>
+    <option value="emprender">Para emprender 🫰🏼💵</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="primera-prenda-persona">🔟 ¿Para quién desarrollarías tu primera prenda?</label>
+  <textarea id="primera-prenda-persona" name="primera-prenda-persona" placeholder="Escribe aquí"></textarea>
+</div>
+
+<div class="form-group">
+  <label for="sugerencias">1️⃣1️⃣ Déjanos un comentario.</label>
+  <textarea id="sugerencias" name="sugerencias" placeholder="Tu comentario"></textarea>
+</div>
+
+<button type="submit" class="submit-button">Enviar Respuesta</button>
+
+</form>
+
+    </div>
+</div>
+
+<div id="mensaje-exito">
+    <img src="images/felicidades-nos-vemos-en-whatsapp.jpg" alt="Felicidades nos vemos en WhatsApp">
+
+    <a href="https://wa.me/+51965723248" class="whatsapp-button" target="_blank">
+        Ir al chat de WhatsApp
+    </a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    const formulario = document.getElementById('miFormulario');
+    const mainContainer = document.getElementById('main-container');
+    const mensajeExito = document.getElementById('mensaje-exito');
+
+    const paisSelect = document.getElementById("pais");
+    const telefonoInput = document.getElementById("telefono");
+
+    const formatos = {
+        "CO": { prefijo: "+57", min: 10, max: 10 },
+        "MX": { prefijo: "+52", min: 10, max: 10 },
+        "PE": { prefijo: "+51", min: 9, max: 9 },
+        "EC": { prefijo: "+593", min: 9, max: 9 },
+        "CL": { prefijo: "+56", min: 9, max: 9 },
+        "BO": { prefijo: "+591", min: 8, max: 8 },
+        "GT": { prefijo: "+502", min: 8, max: 8 },
+        "SV": { prefijo: "+503", min: 8, max: 8 },
+        "AR": { prefijo: "+54", min: 10, max: 10 },
+        "VE": { prefijo: "+58", min: 10, max: 10 },
+        "HN": { prefijo: "+504", min: 8, max: 8 },
+        "UY": { prefijo: "+598", min: 8, max: 8 },
+        "CR": { prefijo: "+506", min: 8, max: 8 }
+    };
+
+    // Asignar prefijo al seleccionar país
+    paisSelect.addEventListener("change", function () {
+        const pais = this.value;
+        const formato = formatos[pais];
+
+        if (!formato) return;
+
+        telefonoInput.value = formato.prefijo + " ";
+        telefonoInput.dataset.prefijo = formato.prefijo;
+        telefonoInput.maxLength = formato.prefijo.length + 1 + formato.max;
+        telefonoInput.placeholder = "Ej: " + formato.prefijo + " " + "X".repeat(formato.max);
+    });
+
+    // Evitar borrar el prefijo
+    telefonoInput.addEventListener("input", function() {
+        const prefijo = this.dataset.prefijo || "";
+        if (prefijo && !this.value.startsWith(prefijo + " ")) {
+            this.value = prefijo + " ";
+        }
+    });
+
+    formulario.addEventListener('submit', function(event) {
+
+        const pais = paisSelect.value;
+        const formato = formatos[pais];
+
+        if (!formato) {
+            alert("Debes seleccionar tu país.");
+            paisSelect.focus();
+            event.preventDefault();
+            return;
+        }
+
+        const numero = telefonoInput.value
+    .replace(formato.prefijo, "")
+    .replace(/\s+/g, "")   // quita espacios
+    .trim();
+
+
+        if (numero.length < formato.min || numero.length > formato.max) {
+            alert("El número de teléfono no es válido para este país.");
+            telefonoInput.focus();
+            event.preventDefault();
+            return;
+        }
+
+        // Continúa con envío
+        event.preventDefault();
+
+        mainContainer.style.display = 'none';
+        mensajeExito.style.display = 'block';
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        const formData = new FormData(formulario);
+        const scriptURL = formulario.getAttribute('action');
+
+        fetch(scriptURL, {
+    method: 'POST',
+    body: formData,
+    mode: 'no-cors'
+})
+
+            .then(response => console.log('Envío exitoso!', response))
+            .catch(error => console.error('Error!', error));
+    });
+
+});
+</script>
+
+
+</body>
+</html>
