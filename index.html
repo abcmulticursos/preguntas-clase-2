@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-s0cale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas Clase 2</title>
 <style>
     /* --- ESTILOS GENERALES Y AJUSTABLES --- */
@@ -225,12 +225,33 @@
 
 <div class="form-group">
     <label for="pais">2️⃣ ¿De qué país nos visitas?</label>
-    <textarea id="pais" name="pais" placeholder="Escribe tu país"></textarea>
+
+    <select id="pais" name="pais" required>
+        <option value="">Selecciona tu país</option>
+        <option value="CO" data-prefijo="+57">🇨🇴 Colombia</option>
+        <option value="MX" data-prefijo="+52">🇲🇽 México</option>
+        <option value="PE" data-prefijo="+51">🇵🇪 Perú</option>
+        <option value="EC" data-prefijo="+593">🇪🇨 Ecuador</option>
+        <option value="CL" data-prefijo="+56">🇨🇱 Chile</option>
+        <option value="BO" data-prefijo="+591">🇧🇴 Bolivia</option>
+        <option value="GT" data-prefijo="+502">🇬🇹 Guatemala</option>
+        <option value="SV" data-prefijo="+503">🇸🇻 El Salvador</option>
+        <option value="AR" data-prefijo="+54">🇦🇷 Argentina</option>
+        <option value="VE" data-prefijo="+58">🇻🇪 Venezuela</option>
+        <option value="HN" data-prefijo="+504">🇭🇳 Honduras</option>
+        <option value="UY" data-prefijo="+598">🇺🇾 Uruguay</option>
+        <option value="CR" data-prefijo="+506">🇨🇷 Costa Rica</option>
+    </select>
 </div>
+
 
 <div class="form-group">
   <label for="telefono">3️⃣ 📞 Número de Teléfono 📲</label>
-  <input type="tel" id="telefono" name="telefono" placeholder="Tu respuesta">
+<input type="tel" id="telefono" name="telefono"
+       inputmode="numeric"
+       pattern="[0-9\s+]*"
+       placeholder="Selecciona tu país primero"
+       required>
 </div>
 
 <div class="form-group">
@@ -315,31 +336,104 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const formulario = document.getElementById('miFormulario');
-        const mainContainer = document.getElementById('main-container');
-        const mensajeExito = document.getElementById('mensaje-exito');
+document.addEventListener('DOMContentLoaded', function() {
 
-        formulario.addEventListener('submit', function(event) {
-            event.preventDefault();
+    const formulario = document.getElementById('miFormulario');
+    const mainContainer = document.getElementById('main-container');
+    const mensajeExito = document.getElementById('mensaje-exito');
 
-            mainContainer.style.display = 'none';
-            mensajeExito.style.display = 'block';
+    const paisSelect = document.getElementById("pais");
+    const telefonoInput = document.getElementById("telefono");
 
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+    const formatos = {
+        "CO": { prefijo: "+57", min: 10, max: 10 },
+        "MX": { prefijo: "+52", min: 10, max: 10 },
+        "PE": { prefijo: "+51", min: 9, max: 9 },
+        "EC": { prefijo: "+593", min: 9, max: 9 },
+        "CL": { prefijo: "+56", min: 9, max: 9 },
+        "BO": { prefijo: "+591", min: 8, max: 8 },
+        "GT": { prefijo: "+502", min: 8, max: 8 },
+        "SV": { prefijo: "+503", min: 8, max: 8 },
+        "AR": { prefijo: "+54", min: 10, max: 10 },
+        "VE": { prefijo: "+58", min: 10, max: 10 },
+        "HN": { prefijo: "+504", min: 8, max: 8 },
+        "UY": { prefijo: "+598", min: 8, max: 8 },
+        "CR": { prefijo: "+506", min: 8, max: 8 }
+    };
 
-            const formData = new FormData(formulario);
-            const scriptURL = formulario.getAttribute('action');
+    // Asignar prefijo al seleccionar país
+    paisSelect.addEventListener("change", function () {
+        const pais = this.value;
+        const formato = formatos[pais];
 
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(response => console.log('Envío exitoso!', response))
-                .catch(error => console.error('Error!', error));
-        });
+        if (!formato) return;
+
+        telefonoInput.value = formato.prefijo + " ";
+        telefonoInput.dataset.prefijo = formato.prefijo;
+        telefonoInput.maxLength = formato.prefijo.length + 1 + formato.max;
+        telefonoInput.placeholder = "Ej: " + formato.prefijo + " " + "X".repeat(formato.max);
     });
+
+    // Evitar borrar el prefijo
+    telefonoInput.addEventListener("input", function() {
+        const prefijo = this.dataset.prefijo || "";
+        if (prefijo && !this.value.startsWith(prefijo + " ")) {
+            this.value = prefijo + " ";
+        }
+    });
+
+    formulario.addEventListener('submit', function(event) {
+
+        const pais = paisSelect.value;
+        const formato = formatos[pais];
+
+        if (!formato) {
+            alert("Debes seleccionar tu país.");
+            paisSelect.focus();
+            event.preventDefault();
+            return;
+        }
+
+        const numero = telefonoInput.value
+    .replace(formato.prefijo, "")
+    .replace(/\s+/g, "")   // quita espacios
+    .trim();
+
+
+        if (numero.length < formato.min || numero.length > formato.max) {
+            alert("El número de teléfono no es válido para este país.");
+            telefonoInput.focus();
+            event.preventDefault();
+            return;
+        }
+
+        // Continúa con envío
+        event.preventDefault();
+
+        mainContainer.style.display = 'none';
+        mensajeExito.style.display = 'block';
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        const formData = new FormData(formulario);
+        const scriptURL = formulario.getAttribute('action');
+
+        fetch(scriptURL, {
+    method: 'POST',
+    body: formData,
+    mode: 'no-cors'
+})
+
+            .then(response => console.log('Envío exitoso!', response))
+            .catch(error => console.error('Error!', error));
+    });
+
+});
 </script>
+
 
 </body>
 </html>
