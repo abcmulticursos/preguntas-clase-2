@@ -367,21 +367,23 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Asignar prefijo al seleccionar país
+// Asignar prefijo y mostrar bandera al seleccionar país
 paisSelect.addEventListener("change", function () {
-    // Actualizar la bandera
-    const texto = paisSelect.options[paisSelect.selectedIndex].text;
-    const emoji = texto.split(" ")[0];
-    document.getElementById("banderaTelefono").textContent = emoji;
-
-    // Mantener la funcionalidad del prefijo
     const pais = this.value;
     const formato = formatos[pais];
+
     if (!formato) return;
 
+    // Asignar prefijo al input
     telefonoInput.value = formato.prefijo + " ";
     telefonoInput.dataset.prefijo = formato.prefijo;
     telefonoInput.maxLength = formato.prefijo.length + 1 + formato.max;
     telefonoInput.placeholder = "Ej: " + formato.prefijo + " " + "X".repeat(formato.max);
+
+    // Mostrar la bandera correspondiente
+    const texto = paisSelect.options[paisSelect.selectedIndex].text;
+    const emoji = texto.split(" ")[0];
+    document.getElementById("banderaTelefono").textContent = emoji;
 });
 
 
