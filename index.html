@@ -247,17 +247,12 @@
 
 <div class="form-group">
   <label for="telefono">3️⃣ 📞 Número de Teléfono 📲</label>
-  <div style="display:flex; align-items:center; gap:10px;">
-      <span id="banderaTelefono" style="font-size:22px;">🌎</span>
-      <input type="tel" id="telefono" name="telefono"
-             inputmode="numeric"
-             pattern="[0-9\s+]*"
-             placeholder="Selecciona tu país primero"
-             required
-             style="flex:1;">
-  </div>
+<input type="tel" id="telefono" name="telefono"
+       inputmode="numeric"
+       pattern="[0-9\s+]*"
+       placeholder="Selecciona tu país primero"
+       required>
 </div>
-
 
 <div class="form-group">
   <label for="formulario-medidas">4️⃣ ¿Ya pediste tu formulario para toma de medidas?</label>
@@ -367,25 +362,17 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Asignar prefijo al seleccionar país
-// Asignar prefijo y mostrar bandera al seleccionar país
-paisSelect.addEventListener("change", function () {
-    const pais = this.value;
-    const formato = formatos[pais];
+    paisSelect.addEventListener("change", function () {
+        const pais = this.value;
+        const formato = formatos[pais];
 
-    if (!formato) return;
+        if (!formato) return;
 
-    // Asignar prefijo al input
-    telefonoInput.value = formato.prefijo + " ";
-    telefonoInput.dataset.prefijo = formato.prefijo;
-    telefonoInput.maxLength = formato.prefijo.length + 1 + formato.max;
-    telefonoInput.placeholder = "Ej: " + formato.prefijo + " " + "X".repeat(formato.max);
-
-    // Mostrar la bandera correspondiente
-    const texto = paisSelect.options[paisSelect.selectedIndex].text;
-    const emoji = texto.split(" ")[0];
-    document.getElementById("banderaTelefono").textContent = emoji;
-});
-
+        telefonoInput.value = formato.prefijo + " ";
+        telefonoInput.dataset.prefijo = formato.prefijo;
+        telefonoInput.maxLength = formato.prefijo.length + 1 + formato.max;
+        telefonoInput.placeholder = "Ej: " + formato.prefijo + " " + "X".repeat(formato.max);
+    });
 
     // Evitar borrar el prefijo
     telefonoInput.addEventListener("input", function() {
