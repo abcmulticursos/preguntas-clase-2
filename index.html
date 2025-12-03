@@ -224,35 +224,31 @@
 </div>
 
 <div class="form-group">
-    <label for="pais">2️⃣ ¿De qué país nos visitas?</label>
-
-    <select id="pais" name="pais" required>
-        <option value="">Selecciona tu país</option>
-        <option value="CO" data-prefijo="+57">🇨🇴 Colombia</option>
-        <option value="MX" data-prefijo="+52">🇲🇽 México</option>
-        <option value="PE" data-prefijo="+51">🇵🇪 Perú</option>
-        <option value="EC" data-prefijo="+593">🇪🇨 Ecuador</option>
-        <option value="CL" data-prefijo="+56">🇨🇱 Chile</option>
-        <option value="BO" data-prefijo="+591">🇧🇴 Bolivia</option>
-        <option value="GT" data-prefijo="+502">🇬🇹 Guatemala</option>
-        <option value="SV" data-prefijo="+503">🇸🇻 El Salvador</option>
-        <option value="AR" data-prefijo="+54">🇦🇷 Argentina</option>
-        <option value="VE" data-prefijo="+58">🇻🇪 Venezuela</option>
-        <option value="HN" data-prefijo="+504">🇭🇳 Honduras</option>
-        <option value="UY" data-prefijo="+598">🇺🇾 Uruguay</option>
-        <option value="CR" data-prefijo="+506">🇨🇷 Costa Rica</option>
-    </select>
+  <label for="pais">2️⃣ ¿De qué país nos visitas?</label>
+  <select id="pais" name="pais" onchange="actualizarBandera()">
+    <option value="" disabled selected hidden>Selecciona un país</option>
+    <option value="pe">🇵🇪 Perú</option>
+    <option value="co">🇨🇴 Colombia</option>
+    <option value="mx">🇲🇽 México</option>
+    <option value="cl">🇨🇱 Chile</option>
+    <option value="ar">🇦🇷 Argentina</option>
+    <option value="ec">🇪🇨 Ecuador</option>
+    <option value="bo">🇧🇴 Bolivia</option>
+    <option value="ve">🇻🇪 Venezuela</option>
+    <option value="pa">🇵🇦 Panamá</option>
+    <option value="cr">🇨🇷 Costa Rica</option>
+  </select>
 </div>
 
-
+    
 <div class="form-group">
   <label for="telefono">3️⃣ 📞 Número de Teléfono 📲</label>
-<input type="tel" id="telefono" name="telefono"
-       inputmode="numeric"
-       pattern="[0-9\s+]*"
-       placeholder="Selecciona tu país primero"
-       required>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <span id="banderaTelefono" style="font-size:22px;">🌎</span>
+    <input type="tel" id="telefono" name="telefono" placeholder="Tu número">
+  </div>
 </div>
+
 
 <div class="form-group">
   <label for="formulario-medidas">4️⃣ ¿Ya pediste tu formulario para toma de medidas?</label>
@@ -432,6 +428,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
+</script>
+
+<script>
+function actualizarBandera() {
+    const select = document.getElementById("pais");
+    const bandera = document.getElementById("banderaTelefono");
+
+    if (select.selectedIndex === 0) {
+        bandera.textContent = "🌎";
+        return;
+    }
+
+    const texto = select.options[select.selectedIndex].text;
+    const emoji = texto.split(" ")[0];
+
+    bandera.textContent = emoji;
+}
 </script>
 
 
